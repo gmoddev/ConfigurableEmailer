@@ -2,8 +2,8 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const schedule = require('node-schedule');
-const fs = require('fs')
-require('dotenv').config()
+const fs = require('fs');
+require('dotenv').config();
 
 const app = express();
 const port = 3000;
@@ -11,15 +11,24 @@ const port = 3000;
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Path to the configuration file
+const configFilePath = 'emailConfig.json';
+
+// Default email configuration
 let emailConfig = {
     senderEmail: process.env.senderEmail,
     senderPassword: process.env.senderPassword,
-    recipientEmail: '', 
+    recipientEmail: '',
     subject: '',
     body: '',
     scheduleTime: '0 8 * * *'
 };
 
+// Load the configuration if it exists
+if (fs.existsSync(configFilePath)) {
+    const savedConfig = JSON.parse(fs.readFileSync(configFilePath));
+    emailConfig = { ...emailConfig, ...savedConfig };
+}
 
 let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -69,20 +78,18 @@ app.post('/schedule', (req, res) => {
     emailConfig.body = body;
     emailConfig.scheduleTime = time;
 
-    // Reschedule the email job with the updated configuration
+    fs.writeFileSync(configFilePath, JSON.stringify(emailConfig, null, 2));
+
     scheduleEmail();
 
     res.render('index', { emailConfig, message: 'Email schedule updated successfully!' });
 });
-
 
 // Send Now route
 app.post('/sendnow', (req, res) => {
     sendEmail();
     res.render('index', { emailConfig, message: 'Email sent immediately!' });
 });
-
-
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
