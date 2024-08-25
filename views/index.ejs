@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Scheduler</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Email Scheduler</h1>
+            <p class="subtitle">Customize and schedule your daily email report.</p>
+
+            <% if (typeof message !== 'undefined') { %>
+                <div class="notification is-success">
+                    <%= message %>
+                </div>
+            <% } %>
+
+            <form action="/schedule" method="post">
+                <!-- Form fields for email configuration -->
+                <div class="field">
+                    <label class="label">Sender Email</label>
+                    <div class="control">
+                        <input class="input" type="email" name="senderEmail" value="<%= emailConfig.senderEmail %>" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Sender Password</label>
+                    <div class="control">
+                        <input class="input" type="password" name="senderPassword" value="<%= emailConfig.senderPassword %>" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Recipient Emails</label>
+                    <div class="control">
+                        <input class="input" type="text" name="recipientEmail" value="<%= emailConfig.recipientEmail %>" required>
+                    </div>
+                    <p class="help">Enter multiple email addresses separated by commas.</p>
+                </div>
+
+                <div class="field">
+                    <label class="label">Subject</label>
+                    <div class="control">
+                        <input class="input" type="text" name="subject" value="<%= emailConfig.subject %>" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Email Body</label>
+                    <div class="control">
+                        <textarea class="textarea" name="body" required><%= emailConfig.body %></textarea>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Schedule Time (Cron Format)</label>
+                    <div class="control">
+                        <input class="input" type="text" name="time" value="<%= emailConfig.scheduleTime %>" required>
+                    </div>
+                    <p class="help">Default: 0 8 * * * (Every day at 8 AM)</p>
+                </div>
+
+                <div class="control">
+                    <button class="button is-primary" type="submit">Update Schedule</button>
+                    <button class="button is-info" formaction="/sendnow" formmethod="post">Send Now</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

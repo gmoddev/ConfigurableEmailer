@@ -1,0 +1,22 @@
+{
+  "name": "configurable_emailer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [""],
+  "author": "Not_Lowest",
+  "license": "ISC",
+  "description": "Configurable emailer so that way you can email en' mass",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "fs": "^0.0.1-security",
+    "node-schedule": "^2.1.1",
+    "nodemailer": "^6.9.14",
+    "schedule": "^0.5.0"
+  }
+}
