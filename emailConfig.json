@@ -1,0 +1,6 @@
+{
+  "recipientEmail": "test@gmail.com",
+  "subject": "ere",
+  "body": "ere",
+  "scheduleTime": "0 8 * * *"
+}
