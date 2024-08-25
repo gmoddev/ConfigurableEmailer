@@ -4,6 +4,10 @@
 
 ### Not_Lowest
 
+### Description
+
+Mass Emailer is a tool that helps you send bulk emails easily. With a simple and modern web interface, you can configure recipients, email content, and schedule emails to be sent automatically.
+
 ### Features
 
 - **Easy and modern UI for configuring your emails**
