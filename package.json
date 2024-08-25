@@ -7,7 +7,7 @@
   },
   "keywords": [""],
   "author": "Not_Lowest",
-  "license": "ISC",
+  "license": "MIT",
   "description": "Configurable emailer so that way you can email en' mass",
   "dependencies": {
     "body-parser": "^1.20.2",
